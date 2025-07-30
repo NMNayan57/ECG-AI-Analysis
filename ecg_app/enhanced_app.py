@@ -154,21 +154,22 @@ st.markdown("""
 def load_ecg_model():
     """Load the trained ECG image classification model"""
     try:
-        model = TrustworthyECGClassifier(num_classes=2)
-        model_path = os.path.join(os.getcwd(), 'ecg_model_deployment.pth')
-        st.info(f"Attempting to load model from: {model_path}") # Added for debugging
+        # Construct the full path to the model file
+        script_dir = os.path.dirname(__file__)
+        model_path = os.path.join(script_dir, 'ecg_model_deployment.pth')
 
+        # Check if the model file exists
         if not os.path.exists(model_path):
-            st.error(f"Model file not found at: {model_path}")
+            st.error(f"Error: Model file not found at {model_path}")
             return None, None
 
-        checkpoint = torch.load(model_path, map_location='cpu')
+        model = TrustworthyECGClassifier(num_classes=2)
+        checkpoint = torch.load(model_path, map_location='cpu') # Use model_path here
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
-        st.success("ECG Model loaded successfully!") # Added confirmation
         return model, checkpoint.get('results', {})
-    except Exception as e: # Catches specific Exception and prints it
-        st.error(f"Error loading ECG model: {e}") # This will print the exact error
+    except Exception as e:
+        st.error(f"An error occurred while loading the ECG model: {e}")
         return None, None
 
 def preprocess_ecg_image(image):
@@ -753,16 +754,16 @@ with tab3:
 
 with tab4:
     st.subheader("System Performance Metrics")
-    
+
     # Overall metrics
     col1, col2, col3, col4 = st.columns(4)
-    
+
     # Show real metrics if model is loaded
     if model_results:
         accuracy = model_results.get('model_performance', {}).get('test_accuracy', 0.727) * 100
         col1.metric("Overall Accuracy", f"{accuracy:.1f}%", "+2.3%")
-    else:
-        col1.metric("Overall Accuracy", "94.5%", "+2.3%")
+    else: # Fallback if model_results is None
+        col1.metric("Overall Accuracy", "N/A", "0%")
     
     col2.metric("Sensitivity", "92.1%", "+1.5%")
     col3.metric("Specificity", "96.8%", "+0.8%")
@@ -799,8 +800,11 @@ with tab4:
     st.plotly_chart(fig, use_container_width=True)
     
     # Image analysis specific metrics
-    if ecg_model:
+    if ecg_model and model_results: # Check both ecg_model and model_results for image analysis metrics
         st.subheader("Image Analysis Performance")
+        # ... (rest of image analysis specific metrics) ...
+    else:
+        st.info("Image analysis performance metrics not available (model not loaded).")
         
         col1, col2 = st.columns(2)
         
