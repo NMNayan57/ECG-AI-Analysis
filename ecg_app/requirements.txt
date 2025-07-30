@@ -1,8 +1,7 @@
-streamlit==1.44.1
-torch==2.2.0
-torchvision==0.17.0
-pillow==11.2.1
-numpy==1.26.4
-plotly==6.2.0
-reportlab ==4.4.3 
-pandas==2.3.1 
+streamlit==1.29.0
+numpy==1.24.3
+pandas==2.0.3
+plotly==5.17.0
+torch==2.0.1
+torchvision==0.15.2
+Pillow==10.0.0
