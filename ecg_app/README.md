@@ -17,75 +17,7 @@ Emergency departments
 Telemedicine and remote consultations
 Community health screenings
 
-Installation
-Prerequisites
 
-Python 3.8+
-Git
-Streamlit Community Cloud account
-GitHub account
-
-Steps
-
-Clone the Repository:
-git clone https://github.com/NMNayan57/ECG-AI-Analysis.git
-cd ECG-AI-Analysis
-
-
-Create a Virtual Environment (optional but recommended):
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-
-Install Dependencies:
-pip install -r requirements.txt
-
-
-Run Locally:
-streamlit run enhanced_app.py
-
-
-
-Deployment on Streamlit Community Cloud
-
-Push to GitHub:
-
-Initialize a Git repository:
-git init
-git add .
-git commit -m "Initial commit"
-
-
-Create a repository on GitHub named ECG-AI-Analysis.
-
-Link and push to GitHub:
-git remote add origin https://github.com/your-username/ECG-AI-Analysis.git
-git branch -M main
-git push -u origin main
-
-
-
-
-Deploy on Streamlit Community Cloud:
-
-Log in to Streamlit Community Cloud.
-Click "New app" and connect your GitHub account.
-Select the ECG-AI-Analysis repository and specify enhanced_app.py as the main file.
-Click Deploy. Streamlit will handle dependency installation and host the app.
-
-
-Note: Ensure ecg_model_deployment.pth is included in the repository or uploaded to Streamlit's file system for image analysis functionality.
-
-
-Requirements
-The project dependencies are listed in requirements.txt:
-streamlit==1.29.0
-numpy==1.24.3
-pandas==2.0.3
-plotly==5.17.0
-torch==2.0.1
-torchvision==0.15.2
-Pillow==10.0.0
 
 Usage
 
@@ -115,13 +47,6 @@ Real-time monitoring is currently simulated.
 Contributing
 Contributions are welcome! Please:
 
-Fork the repository.
-Create a feature branch (git checkout -b feature/your-feature).
-Commit changes (git commit -m "Add your feature").
-Push to the branch (git push origin feature/your-feature).
-Open a Pull Request.
 
-License
-This project is licensed under the MIT License.
 Contact
 Developed by Nasim Mahmud Nayan for PhD research in Healthcare AI. For inquiries, open an issue on GitHub or contact [smnoyan670@gmail.com].
