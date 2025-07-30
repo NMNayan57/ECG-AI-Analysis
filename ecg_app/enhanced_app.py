@@ -384,15 +384,18 @@ explanation_level = st.sidebar.select_slider(
 # Load model once
 ecg_model, model_results = load_ecg_model()
 
-st.sidebar.markdown("### 📱 Edge Deployment Info")
+if model_results:
+    accuracy = model_results.get('model_performance', {}).get('test_accuracy', 0.73) * 100
+else:
+    accuracy = 73.0  # fallback
+
 st.sidebar.info(f"""
 - Model size: < 30MB  
 - Inference time: < 100ms  
 - Works offline: ✅  
 - Battery efficient: ✅
-- Accuracy: {model_results.get('model_performance', {}).get('test_accuracy', 0.73)*100:.1f}%
+- Accuracy: {accuracy:.1f}%
 """)
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Main Tabs
 # ─────────────────────────────────────────────────────────────────────────────
