@@ -155,11 +155,20 @@ def load_ecg_model():
     """Load the trained ECG image classification model"""
     try:
         model = TrustworthyECGClassifier(num_classes=2)
-        checkpoint = torch.load('ecg_model_deployment.pth', map_location='cpu')
+        model_path = os.path.join(os.getcwd(), 'ecg_model_deployment.pth')
+        st.info(f"Attempting to load model from: {model_path}") # Added for debugging
+
+        if not os.path.exists(model_path):
+            st.error(f"Model file not found at: {model_path}")
+            return None, None
+
+        checkpoint = torch.load(model_path, map_location='cpu')
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
+        st.success("ECG Model loaded successfully!") # Added confirmation
         return model, checkpoint.get('results', {})
-    except:
+    except Exception as e: # Catches specific Exception and prints it
+        st.error(f"Error loading ECG model: {e}") # This will print the exact error
         return None, None
 
 def preprocess_ecg_image(image):
