@@ -35,7 +35,7 @@ Model Details
 
 Architecture: EfficientNet-B0 with attention mechanism and uncertainty/quality heads.
 Training Data: PTB-XL dataset + generated ECG images.
-Performance: ~72.7% test accuracy (improves with quality data).
+Performance: ~76.7% test accuracy (improves with quality data).
 Edge Optimization: <30MB model size, <100ms inference time.
 
 Limitations
